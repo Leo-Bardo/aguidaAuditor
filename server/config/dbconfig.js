@@ -19,13 +19,16 @@ mongoose.connection.on('connected', async () => {
         Contraseña: 'root321', // Asegúrate de encriptar esta contraseña en un entorno de producción
         Puesto: 'Global',
         Escolaridad: 'Ingenieria en Alimentos',
-        TipoUsuario: 'Administrador'
+        TipoUsuario: 'Administrador',
+        Departamento: 'Departamento'
         // Agrega aquí cualquier otro campo que necesites
       });
 
       await rootUser.save();
       console.log("Usuario root creado");
     } else {
+      console.log('MONGODB_URL:', MONGODB_URL);
+
       console.log("Usuario root ya existe");
     }
   } catch (err) {
@@ -33,7 +36,8 @@ mongoose.connection.on('connected', async () => {
   }
 });
 
-mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URL)
   .catch(err => console.error('Error al conectar a MongoDB:', err));
+
 
 module.exports = mongoose;
